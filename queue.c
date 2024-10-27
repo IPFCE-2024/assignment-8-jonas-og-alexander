@@ -53,17 +53,32 @@ int dequeue(queue *q){
 
 // Opgave 4
 void push(int element, node **head) {
-
+    node* newNode = (node*)malloc(sizeof(node));
+    newNode->data = element;
+    newNode->next = *head;
+    *head = newNode;
 }
 
 int pop(node **head) {
-    return -1;
+    node* temp = *head;
+    int popped = temp->data;
+    *head = (*head)->next;
+    free(temp);
+    return popped;
 }
 
 void enqueueStack(queue *q, int x) {
-
+    push(x, &q->front);
+    q->size++;
 }
 
 int dequeueStack(queue *q) {
-    return -1;
+    if (q->rear ==NULL) {
+        while (q->front != NULL) {
+            int element = pop(&q->front);
+            push(element, &q->rear);
+        }
+    }
+    q->size--;
+    return pop(&q->rear);
 }
