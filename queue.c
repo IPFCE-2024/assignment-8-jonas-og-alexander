@@ -60,6 +60,7 @@ void push(int element, node **head) {
 }
 
 int pop(node **head) {
+    assert(*head != NULL);
     node* temp = *head;
     int popped = temp->data;
     *head = (*head)->next;
@@ -79,6 +80,7 @@ int dequeueStack(queue *q) {
             push(element, &q->rear);
         }
     }
+    assert(q->rear != NULL);
     q->size--;
     return pop(&q->rear);
 }
